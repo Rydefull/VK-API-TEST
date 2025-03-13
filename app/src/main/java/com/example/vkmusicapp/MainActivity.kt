@@ -73,7 +73,8 @@ class MainActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 accessToken?.let { token ->
-                    val response = vkApiService.getPhotos("232716745", "profile", "5.131", token) //43706933
+                    //inter profile id 
+                    val response = vkApiService.getPhotos(ownerid = "232716745", "profile", "5.131", token) //43706933
                     val photoList = response.response?.items ?: emptyList()
 
                     runOnUiThread {
@@ -97,7 +98,6 @@ class MainActivity : AppCompatActivity() {
         VK.logout() // Вызов метода выхода
         accessToken = null // Очистка токена
         Toast.makeText(this, "Вы вышли из аккаунта", Toast.LENGTH_SHORT).show()
-        // Дополнительно можно обновить интерфейс, например, вызвать старт авторизации
         startAuth()
     }
 }
